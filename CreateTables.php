@@ -100,7 +100,7 @@
     $sql5 = "CREATE TABLE Pacientes 
     (
         Idp  int AUTO_INCREMENT,
-        PRIMARY KEY(Id),
+        PRIMARY KEY(Idp),
         Nombre CHAR(25),
         Apellido CHAR(25),
         Prioridad int,
