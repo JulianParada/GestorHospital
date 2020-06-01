@@ -35,13 +35,13 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
         INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Rien', 'Sptm', 2, 3, 4);
         UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 4;
 
-        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('mascarillas', 10, 'Enseres');
-        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('suero', 5, 'Enseres');
-        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('anestesia', 3, 'Enseres');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('Mascarillas', 10, 'Enseres');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('Suero', 5, 'Enseres');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('Anestesia', 3, 'Enseres');
 
-        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('ventiladores', 15, 'Equipo');
-        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('máquinas de resonancia', 5, 'Equipo');
-        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('máquinas de ecografía', 7, 'Equipo');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('Ventiladores', 15, 'Equipo');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('Máquinas de Resonancia', 5, 'Equipo');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('Máquinas de Ecografía', 7, 'Equipo');
 
         INSERT INTO PacientesXInventario (Paciente, Item) VALUES (1,1);
         UPDATE Inventario SET Cantidad = 9 WHERE Id = 1;
