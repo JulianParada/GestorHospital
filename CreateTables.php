@@ -157,10 +157,12 @@
 
     $sql8 = "CREATE TABLE Solicitudes
     (
-        Id  INT NOT NULL,
+        Id  INT AUTO_INCREMENT,
+        PRIMARY KEY (Id),
         Suministro INT NOT NULL,
         FOREIGN KEY (Suministro) references Inventario (Id),
-        Estado Char(25)
+        Estado Char(25),
+        FechaSolicitud DATETIME
     )";
     if (mysqli_query($con, $sql8)) {
         echo "Tabla Solicitudes creada correctamente";

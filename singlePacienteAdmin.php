@@ -80,7 +80,7 @@
             $resInventario = mysqli_query($con,$sqlInventario);
             $filaInventario = mysqli_fetch_array($resInventario);
 
-            echo "<h1 align=\"center\">Inventarios</h1>";
+            echo "<h1 align=\"center\">Inventario</h1>";
             $str_datos = "";
             $str_datos="";
             $str_datos.='<br>';
@@ -93,15 +93,14 @@
                         $str_datos.='<th scope="col"></th>';
                     $str_datos.='</tr>';
                     $str_datos.='</thead>';
-    
+                    $str_datos.='<tbody>';
                     foreach($resInventario as $inventario){
-                        $str_datos.='<tbody>';
                             $str_datos.='<tr>';
                                 $str_datos.='<td>'. $inventario['Nombre'].'</td>';
                                 $str_datos.='<td>'. $inventario['Tipo'].'</td>';
                             $str_datos.='</tr>';
-                        $str_datos.='</tbody>';
                     }
+                    $str_datos.='</tbody>';
                 $str_datos.='</table>';
             $str_datos.='<br>';
             echo $str_datos;

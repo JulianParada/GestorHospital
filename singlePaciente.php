@@ -94,9 +94,8 @@
                         $str_datos.='<th scope="col"></th>';
                     $str_datos.='</tr>';
                     $str_datos.='</thead>';
-    
+                    $str_datos.='<tbody>';
                     foreach($resInventario as $inventario){
-                        $str_datos.='<tbody>';
                             $str_datos.='<tr>';
                                 $str_datos.='<td>'. $inventario['Nombre'].'</td>';
                                 $str_datos.='<td>'. $inventario['Tipo'].'</td>';
@@ -108,8 +107,8 @@
                                 '\'>'. 'Eliminar'. '</a>
                                 </td>';
                             $str_datos.='</tr>';
-                        $str_datos.='</tbody>';
                     }
+                    $str_datos.='</tbody>';
                 $str_datos.='</table>';
             $str_datos.='<br>';
             echo $str_datos;

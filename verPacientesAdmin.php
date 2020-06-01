@@ -36,9 +36,8 @@
                         $str_datos.='<th scope="col">Médico</th>';
                     $str_datos.='</tr>';
                     $str_datos.='</thead>';
-            
+                    $str_datos.='<tbody>';
             foreach ($res as $persona) {
-                $str_datos.='<tbody>';
                     $str_datos.='<tr>';
                         $str_datos .= '<td>'.'<a href=\'singlePacienteAdmin.php?cc='.$persona['Idp'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
                         $str_datos .= '<td>'. $persona['Apellido'] . '</td>';
@@ -46,8 +45,8 @@
                         $str_datos .= '<td>'. $persona['Prioridad'] . '</td>';
                         $str_datos .= '<td>'. $persona['NombreUsuario'] . '</td>';
                     $str_datos.='</tr>';
-                $str_datos.='</tbody>';
             }
+            $str_datos.='</tbody>';
             $str_datos.='</table>';
             $str_datos.='<br>';
             
