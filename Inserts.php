@@ -29,6 +29,32 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
 
         INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Rien', 'Sptm', 2, 3, 4);
 
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('mascarillas', 10, 'Enseres');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('suero', 5, 'Enseres');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('anestesia', 3, 'Enseres');
+
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('ventiladores', 15, 'Equipo');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('máquinas de resonancia', 5, 'Equipo');
+        INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('máquinas de ecografía', 7, 'Equipo');
+
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (1,1);
+        UPDATE Inventario SET Cantidad = 9 WHERE Id = 1;
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (1,2);
+        UPDATE Inventario SET Cantidad = 4 WHERE Id = 2;
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (1,3);
+        UPDATE Inventario SET Cantidad = 2 WHERE Id = 3;
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (1,4);
+        UPDATE Inventario SET Cantidad = 14 WHERE Id = 4;
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (1,5);
+        UPDATE Inventario SET Cantidad = 4 WHERE Id = 5;
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (1,6);
+        UPDATE Inventario SET Cantidad = 6 WHERE Id = 6;
+
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (2,1);
+        UPDATE Inventario SET Cantidad = 8 WHERE Id = 1;
+        INSERT INTO PacientesXInventario (Paciente, Item) VALUES (2,4);
+        UPDATE Inventario SET Cantidad = 13 WHERE Id = 4;
+
         ";
 if (mysqli_multi_query($con, $sql)) {
     echo "Inserts hechos correctamente";
