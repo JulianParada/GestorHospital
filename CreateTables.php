@@ -138,7 +138,7 @@
         Id  int AUTO_INCREMENT,
         PRIMARY KEY(Id),
         Paciente INT NOT NULL,
-        FOREIGN KEY (Paciente) references Pacientes (Id),
+        FOREIGN KEY (Paciente) references Pacientes (Idp),
         Item INT NOT NULL,
         FOREIGN KEY (Item) references Inventario (Id)
     )";
