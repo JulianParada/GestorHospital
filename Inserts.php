@@ -61,6 +61,10 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
         INSERT INTO PacientesXInventario (Paciente, Item) VALUES (2,4);
         UPDATE Inventario SET Cantidad = 13 WHERE Id = 4;
 
+        INSERT INTO Solicitudes (Id, Suministro, Estado) VALUES (1, 1, 'No Aprobado');
+        INSERT INTO Solicitudes (Id, Suministro, Estado) VALUES (1, 2, 'No Aprobado');
+        INSERT INTO Solicitudes (Id, Suministro, Estado) VALUES (1, 3, 'No Aprobado');
+
         ";
 if (mysqli_multi_query($con, $sql)) {
     echo "Inserts hechos correctamente";
