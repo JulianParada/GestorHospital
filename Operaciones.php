@@ -307,6 +307,46 @@
                 }
             }
 
+            if(isset($_POST['asignarPaciente'])){
+                $cedulaPaciente = $_POST['cedulaPaciente'];
+                $nombrePaciente = $_POST['nombrePaciente'];
+                $apellidoPaciente = $_POST['apellidoPaciente'];
+                $diagnosticoPaciente = $_POST['diagnosticoPaciente'];
+                $prioridadPaciente = $_POST['prioridadPaciente'];
+                $fechaPaciente = date('Y-m-d',strtotime($_POST['fechaPaciente']));
+                $duracionPaciente = $_POST['duracionPaciente'];
+                $idCamaPaciente = $_POST['idCamaPaciente'];
+                $idMedicoPaciente = $_POST['idMedicoPaciente'];
+
+                $sqlInsertPaciente = "INSERT INTO PACIENTES
+                (Nombre,
+                Apellido,
+                Cedula,
+                Duracion,
+                Diagnostico,
+                FechaIngreso,
+                Prioridad,
+                Medico,
+                Cama)
+                Values (\"$nombrePaciente\",
+                \"$apellidoPaciente\",
+                \"$cedulaPaciente\",
+                \"$duracionPaciente\",
+                \"$diagnosticoPaciente\",
+                \"$fechaPaciente\",
+                \"$prioridadPaciente\",
+                \"$idMedicoPaciente\",
+                \"$idCamaPaciente\");
+                UPDATE CAMAS SET Estado = \"Ocupado\" WHERE ID = \"$idCamaPaciente\";";
+
+                if (mysqli_multi_query($con, $sqlInsertPaciente)) {
+                    echo "<h2>Paciente Asignado</h2>";
+                    echo "<br>";
+                } 
+                else {
+                    echo "Error al Asignar el paciente" . mysqli_error($con);
+                }
+            }
         ?>
     </body>
 </html>

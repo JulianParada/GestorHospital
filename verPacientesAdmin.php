@@ -17,7 +17,7 @@
             echo "Error en la conexión: " . mysqli_connect_error();
         }
 
-        $verify = "SELECT * FROM PACIENTES INNER JOIN USUARIOS ON USUARIOS.Id = PACIENTES.Medico";
+        $verify = "SELECT * FROM PACIENTES INNER JOIN USUARIOS ON PACIENTES.Medico =  USUARIOS.Id";
         $res = mysqli_query($con, $verify);
         $exists = mysqli_num_rows($res);
 
@@ -40,7 +40,7 @@
             foreach ($res as $persona) {
                 $str_datos.='<tbody>';
                     $str_datos.='<tr>';
-                        $str_datos .= '<td>'.'<a href=\'singlePacienteAdmin.php?cc='.$persona['Id'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
+                        $str_datos .= '<td>'.'<a href=\'singlePacienteAdmin.php?cc='.$persona['Idp'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
                         $str_datos .= '<td>'. $persona['Apellido'] . '</td>';
                         $str_datos .= '<td>'. $persona['Cama'].'</td>';
                         $str_datos .= '<td>'. $persona['Prioridad'] . '</td>';

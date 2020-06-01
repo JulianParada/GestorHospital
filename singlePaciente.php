@@ -20,11 +20,11 @@
 
             $identificacion = $_GET['cc'];
 
-            $sqlPaciente = "SELECT * FROM Pacientes WHERE ID = \"$identificacion\"";
+            $sqlPaciente = "SELECT * FROM Pacientes WHERE Idp = \"$identificacion\"";
             $resPaciente = mysqli_query($con, $sqlPaciente);
             $fila = mysqli_fetch_array($resPaciente);
             
-            $id = $fila['Id'];
+            $id = $fila['Idp'];
             $nombre = $fila['Nombre'];
             $apellido = $fila['Apellido'];
             $prioridad = $fila['Prioridad'];

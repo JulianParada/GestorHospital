@@ -43,17 +43,16 @@
                         $str_datos.='<th scope="col">Prioridad</th>';
                     $str_datos.='</tr>';
                     $str_datos.='</thead>';
-            
+                    $str_datos.='<tbody>';
             foreach ($res as $persona) {
-                $str_datos.='<tbody>';
                     $str_datos.='<tr>';
-                        $str_datos .= '<td>'.'<a href=\'singlePaciente.php?cc='.$persona['Id'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
+                        $str_datos .= '<td>'.'<a href=\'singlePaciente.php?cc='.$persona['Idp'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
                         $str_datos .= '<td>'. $persona['Apellido'] . '</td>';
                         $str_datos .= '<td>'. $persona['Cama'].'</td>';
                         $str_datos .= '<td>'. $persona['Prioridad'] . '</td>';
                     $str_datos.='</tr>';
-                $str_datos.='</tbody>';
             }
+            $str_datos.='</tbody>';
             $str_datos.='</table>';
             $str_datos.='<br>';
             
