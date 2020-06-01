@@ -104,6 +104,10 @@
         PRIMARY KEY(Idp),
         Nombre CHAR(25),
         Apellido CHAR(25),
+        Cedula INT NOT NULL,
+        Duracion INT NOT NULL,
+        Diagnostico VARCHAR(255), 
+        FechaIngreso DATE NOT NULL,
         Prioridad int,
         Medico INT NOT NULL,
         FOREIGN KEY (Medico) references Usuarios (Id),
@@ -111,7 +115,7 @@
         FOREIGN KEY (Cama) references Camas (Id)
     )";
     if (mysqli_query($con, $sql5)) {
-        echo "Tabla Camas creada correctamente";
+        echo "Tabla Pacientes creada correctamente";
     } else {
         echo "Error en la creacion " . mysqli_error($con);
     }
