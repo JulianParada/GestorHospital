@@ -30,6 +30,8 @@
             $prioridad = $fila['Prioridad'];
             $cama = $fila ['Cama'];
 
+            $idMedico = $_GET['ccm'];
+
             $sqlCama = "SELECT * FROM CAMAS WHERE ID = \"$cama\" ";
             $resCama = mysqli_query($con,$sqlCama);
             $filaCama = mysqli_fetch_array($resCama);
@@ -80,11 +82,10 @@
             $resInventario = mysqli_query($con,$sqlInventario);
             $filaInventario = mysqli_fetch_array($resInventario);
 
-            echo "<h1 align=\"center\">Inventarios</h1>";
+
+            echo "<h1 align=\"center\">Inventario</h1>";
             $str_datos = "";
-            $str_datos="";
-            $str_datos.='<br>';
-            $str_datos.='<br>';
+            $str_datos.= '<a href=\'agregarRecursos.php?cc='.$id.'&ccm='.$idMedico.' '.'\' class="btn btn-success">Asignar recursos</a>';
             $str_datos.='<table class="table">';
                 $str_datos.='<thead class="thead-dark">';
                     $str_datos.='<tr>';

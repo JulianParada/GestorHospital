@@ -46,7 +46,7 @@
                     $str_datos.='<tbody>';
             foreach ($res as $persona) {
                     $str_datos.='<tr>';
-                        $str_datos .= '<td>'.'<a href=\'singlePaciente.php?cc='.$persona['Idp'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
+                        $str_datos .= '<td>'.'<a href=\'singlePaciente.php?cc='.$persona['Idp'].'&ccm='.$id.'\'>'. $persona['Nombre'] . '</a>'.'</td>';
                         $str_datos .= '<td>'. $persona['Apellido'] . '</td>';
                         $str_datos .= '<td>'. $persona['Cama'].'</td>';
                         $str_datos .= '<td>'. $persona['Prioridad'] . '</td>';
