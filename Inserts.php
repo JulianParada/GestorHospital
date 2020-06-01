@@ -25,14 +25,14 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
         INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 1);
         INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 2);
         
-        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('Juanito', 'Camachutra', 12345, 3, 'Se va a morir', '2020-6-1', 3, 2, 1);
+        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('Juanito', 'Camachutra', 12345, 3, 'Se va a morir', '2020/6/1', 3, 2, 1);
         UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 1;
-        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('JuCami', 'Deschaflo', 13579, 5, 'Tiene Sida', '2020-6-2', 2, 2, 2);
+        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('JuCami', 'Deschaflo', 13579, 5, 'Tiene Sida', '2020/6/2', 2, 2, 2);
         UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 2;
-        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('Juliancho', 'Stop', 24680, 7, 'Tiene cancer', '2020-6-3', 1, 2, 3);
+        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('Juliancho', 'Stop', 24680, 7, 'Tiene cancer', '2020/6/3', 1, 2, 3);
         UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 3;
 
-        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('Rien', 'Sptm', 67890, 9, 'Coronaviros is real', '2020-6-4', 2, 3, 4);
+        INSERT INTO Pacientes (Nombre, Apellido, Cedula, Duracion, Diagnostico, FechaIngreso, Prioridad, Medico, Cama) VALUES ('Rien', 'Sptm', 67890, 9, 'Coronaviros is real', '2020/6/4', 2, 3, 4);
         UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 4;
 
         INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('Mascarillas', 10, 'Enseres');
