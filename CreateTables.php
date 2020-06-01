@@ -105,7 +105,7 @@
         Apellido CHAR(25),
         Prioridad int,
         Medico INT NOT NULL,
-        FOREIGN KEY (Medico) references Usuarios (Id),
+        FOREIGN KEY (Medico) references Personas (Cedula),
         Cama INT NOT NULL,
         FOREIGN KEY (Cama) references Camas (Id)
     )";
