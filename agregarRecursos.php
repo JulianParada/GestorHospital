@@ -13,6 +13,8 @@
         <?php 
 
             include_once dirname(__FILE__) . '../../config.php';
+            include_once dirname(__FILE__) . '/utils.php';
+
 
             $con = mysqli_connect(HOST_DB, USUARIO_DB, USUARIO_PASS, NOMBRE_DB);
             if (mysqli_connect_errno()) {
@@ -37,15 +39,53 @@
             $exists = mysqli_num_rows($res);
 
             if($exists > 0) {
-                
-                echo $nombrePaciente;
-                echo $nombreMedico;
+
+                $str_datos = "";
+                $recursos = array();
+                while($fila = mysqli_fetch_array($res)){
+                    $recursos["'".$fila['Id']."'"] = $fila['Nombre'];
+                }
+                $selectRecursos = crearSelect('Recursos', 'recursos',$recursos);
+                $str_datos .= 
+
+                "<div class=\"container fluid\">
+                <div class=\"container-fluid alert alert-success\" style=\"margin: 1vw\">
+                    <h1>Solicitar Recurso</h1>
+                    <form action='Operaciones.php' method='post'>
+                        <div class=\"row form-group\">
+                            <label for=\"nombreMedico\" class=\"col-sm-2 col-form-label\">Nombre del Médico</label>
+                            <div class=\"col-sm-4\">
+                                <input type=\"text\" name=\"nombreMedico\" value=\"$nombreMedico\" class=\"form-control\" readonly>
+                            </div>
+                        </div>
+                        <div class=\"row form-group\">
+                            <label for=\"nombrePaciente\" class=\"col-sm-2 col-form-label\">Nombre del Paciente</label>
+                            <div class=\"col-sm-4\">
+                                <input type=\"text\" name=\"nombrePaciente\" value=\"$nombrePaciente\" class=\"form-control\" readonly>
+                            </div>
+                        </div>
+                        <div class=\"row form-group\">";
+                        $str_datos .= $selectRecursos;
+                        $str_datos .= 
+                        "</div>
+                        <div class=\"row form-group\">
+                            <div class=\"col-sm-6\">
+                                <button type=\"submit\" name='registrarSolicitud' class=\"btn btn-success btn-lg btn-block\">
+                                    Registrar Solicitud
+                                </button>
+                            </div>
+                        </div> 
+                    </form>
+                    <a href=\"singlePaciente.php\" class=\"btn btn-info\">Regresar</a>
+                </div> 
+            </div>";
+
+            echo $str_datos;
 
             } else {
                 echo "No hay recursos disponibles en el sistema";
                 echo "<br>";
                 echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
-    
             }
         ?>
 
