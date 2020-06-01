@@ -121,7 +121,7 @@
     (
         Id  int AUTO_INCREMENT,
         PRIMARY KEY(Id),
-        Nombre CHAR(15),
+        Nombre CHAR(60),
         Cantidad INT NOT NULL,
         Tipo VARCHAR(255)
     )";
