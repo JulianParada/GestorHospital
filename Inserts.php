@@ -23,11 +23,11 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
         INSERT INTO Camas (Habitacion) VALUES (2);
         INSERT INTO Camas (Habitacion) VALUES (2);
         
-        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Juanito', 'Camachutra', 3, 12345, 1);
-        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('JuCami', 'Deschaflo', 2, 12345, 2);
-        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Juliancho', 'Stop', 1, 12345, 3);
+        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Juanito', 'Camachutra', 3, 2, 1);
+        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('JuCami', 'Deschaflo', 2, 2, 2);
+        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Juliancho', 'Stop', 1, 2, 3);
 
-        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Rien', 'Sptm', 2, 67890, 4);
+        INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Rien', 'Sptm', 2, 3, 4);
 
         ";
 if (mysqli_multi_query($con, $sql)) {
