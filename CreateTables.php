@@ -5,8 +5,8 @@
     (
         Cedula INT NOT NULL,
         PRIMARY KEY(Cedula),
-        Nombre CHAR(15),
-        Apellido CHAR(15),
+        Nombre CHAR(25),
+        Apellido CHAR(25),
         Email CHAR(50)
     )";
     if (mysqli_query($con, $sql)) {
@@ -101,8 +101,9 @@
     (
         Id  int AUTO_INCREMENT,
         PRIMARY KEY(Id),
-        Nombre CHAR(15),
-        Apellido CHAR(15),
+        Nombre CHAR(25),
+        Apellido CHAR(25),
+        Prioridad int,
         Medico INT NOT NULL,
         FOREIGN KEY (Medico) references Usuarios (Id),
         Cama INT NOT NULL,
@@ -143,6 +144,22 @@
     )";
     if (mysqli_query($con, $sql7)) {
         echo "Tabla PacientesXInventario creada correctamente";
+    } else {
+        echo "Error en la creacion " . mysqli_error($con);
+    }
+
+    echo "<br>";
+
+    $sql8 = "CREATE TABLE Solicitudes
+    (
+        Id  INT NOT NULL,
+        PRIMARY KEY(Id),
+        Suministro INT NOT NULL,
+        FOREIGN KEY (Suministro) references Inventario (Id),
+        Aprobado Char(25)
+    )";
+    if (mysqli_query($con, $sql8)) {
+        echo "Tabla Solicitudes creada correctamente";
     } else {
         echo "Error en la creacion " . mysqli_error($con);
     }
