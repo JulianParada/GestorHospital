@@ -28,16 +28,20 @@ if(isset($_POST['iniciarsesion'])){
                 
                 if($rol == "medico"){
     
-                    $str_datos = "";
-                    $str_datos .= "<br>";
-                    $str_datos .= "<button><h1>
-                    <a href=\"agregarAdmin.php\">Ver Pacientes</a></h1></button>";
-                    $str_datos .= "<br>"; 
-                    $str_datos .= "<button><h1>
-                    <a href=\"agregarHabitacion.php\">Ver Habitaciónes</a></h1></button>";
-                    $str_datos .= "<br>";
-                    echo "".$str_datos;
-                    $str_datos .= "<br>";
+                    $str_datos = 
+                    "<form action='verPacientes.php' method='post'>
+                        <button type=\"submit\" value='$cedula' name='verPacientes'>
+                            Ver Pacientes
+                        </button>
+                    </form>";
+                    $str_datos .= 
+                    "<form action='verHabitaciones.php' method='post'>
+                        <button type=\"submit\" value='$cedula' name='verPacientes'>
+                            Ver Habitaciones
+                        </button>
+                    </form>";
+
+                    echo $str_datos;
     
                 }else if($rol == "administrador"){
 
@@ -247,7 +251,24 @@ if(isset($_POST['agregarCama'])){
        echo "<a href=\"agregarHabitacion.php\">Regresar</a>";
     }
     
+}
+
+if(isset($_GET['idPaciente']) && isset($_GET['idInventario'])){
     
-   }
+    $idPaciente = $_GET['idPaciente'];
+    $idInventario = $_GET['idInventario'];
+
+    $sqlDelete = "DELETE FROM PacientesXInventario WHERE Paciente = \"$idPaciente\" AND Item = \"$idInventario\";
+    UPDATE Inventario set Cantidad = Cantidad + 1 where Id =\"$idInventario\"";
+
+    if (mysqli_multi_query($con, $sqlDelete)) {
+        echo "Equipo Eliminado correctamente";
+        echo "<br>";
+        echo '<a href=\'singlePaciente.php?cc='.$idPaciente.'\'>'. 'Regresar' . '</a>';
+    } 
+    else {
+        echo "Error al borrar el equipo" . mysqli_error($con);
+    }
+}
 
 ?>

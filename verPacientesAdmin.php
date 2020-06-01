@@ -16,16 +16,8 @@
         if (mysqli_connect_errno()) {
             echo "Error en la conexión: " . mysqli_connect_error();
         }
-        $usuario = $_POST['verPacientes'];
 
-        $sqlMedico = "SELECT Id FROM Usuarios WHERE CEDULA = \"$usuario\"";
-        $resMedico = mysqli_query($con, $sqlMedico);
-        $fila = mysqli_fetch_array($resMedico);
-        $id = $fila['Id'];
-
-
-
-        $verify = "SELECT * FROM PACIENTES WHERE Medico = \"$id\" ";
+        $verify = "SELECT * FROM USUARIOS INNER JOIN PERSONAS WHERE ROL = 'medico'";
         $res = mysqli_query($con, $verify);
         $exists = mysqli_num_rows($res);
 
