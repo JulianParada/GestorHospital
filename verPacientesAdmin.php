@@ -17,7 +17,7 @@
             echo "Error en la conexión: " . mysqli_connect_error();
         }
 
-        $verify = "SELECT * FROM USUARIOS INNER JOIN PERSONAS WHERE ROL = 'medico'";
+        $verify = "SELECT * FROM PACIENTES INNER JOIN USUARIOS ON USUARIOS.Id = PACIENTES.Medico";
         $res = mysqli_query($con, $verify);
         $exists = mysqli_num_rows($res);
 
@@ -33,16 +33,18 @@
                         $str_datos.='<th scope="col">Apellido</th>';
                         $str_datos.='<th scope="col">Cama</th>';
                         $str_datos.='<th scope="col">Prioridad</th>';
+                        $str_datos.='<th scope="col">Médico</th>';
                     $str_datos.='</tr>';
                     $str_datos.='</thead>';
             
             foreach ($res as $persona) {
                 $str_datos.='<tbody>';
                     $str_datos.='<tr>';
-                        $str_datos .= '<td>'.'<a href=\'singlePaciente.php?cc='.$persona['Id'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
+                        $str_datos .= '<td>'.'<a href=\'singlePacienteAdmin.php?cc='.$persona['Id'].'\'>'. $persona['Nombre'] . '</a>'.'</td>';
                         $str_datos .= '<td>'. $persona['Apellido'] . '</td>';
                         $str_datos .= '<td>'. $persona['Cama'].'</td>';
                         $str_datos .= '<td>'. $persona['Prioridad'] . '</td>';
+                        $str_datos .= '<td>'. $persona['NombreUsuario'] . '</td>';
                     $str_datos.='</tr>';
                 $str_datos.='</tbody>';
             }
@@ -54,7 +56,7 @@
             echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
         }
         else{
-            echo "El medico no tiene pacientes asignados";
+            echo "No hay pacientes registrados en el sistema";
             echo "<br>";
             echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
         }
