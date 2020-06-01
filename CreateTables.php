@@ -7,7 +7,7 @@
         PRIMARY KEY(Cedula),
         Nombre CHAR(25),
         Apellido CHAR(25),
-        Email CHAR(50)
+        Email CHAR(50) NOT NULL
     )";
     if (mysqli_query($con, $sql)) {
         echo "Tabla Personas creada correctamente";
@@ -35,9 +35,9 @@
     (
         Id  int AUTO_INCREMENT,
         PRIMARY KEY(Id),
-        NombreUsuario VARCHAR(255),
-        Rol VARCHAR(255),
-        Contrasena VARCHAR(255),
+        NombreUsuario VARCHAR(255) NOT NULL,
+        Rol VARCHAR(255) NOT NULL,
+        Contrasena VARCHAR(255) NOT NULL,
         Cedula INT NOT NULL,
         FOREIGN KEY (Cedula) references Personas (Cedula)
     )";
@@ -86,6 +86,7 @@
     (
         Id  int AUTO_INCREMENT,
         PRIMARY KEY(Id),
+        Estado VARCHAR(25),
         Habitacion INT NOT NULL,
         FOREIGN KEY (Habitacion) references Habitaciones (Id)
     )";

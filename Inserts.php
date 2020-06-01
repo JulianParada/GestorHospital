@@ -18,16 +18,22 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
         INSERT INTO Habitaciones (Numero) VALUES (901);
         INSERT INTO Habitaciones (Numero) VALUES (902);
 
-        INSERT INTO Camas (Habitacion) VALUES (1);
-        INSERT INTO Camas (Habitacion) VALUES (1);
-        INSERT INTO Camas (Habitacion) VALUES (2);
-        INSERT INTO Camas (Habitacion) VALUES (2);
+        INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 1);
+        INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 1);
+        INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 2);
+        INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 2);
+        INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 1);
+        INSERT INTO Camas (Estado, Habitacion) VALUES ('Disponible', 2);
         
         INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Juanito', 'Camachutra', 3, 2, 1);
+        UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 1;
         INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('JuCami', 'Deschaflo', 2, 2, 2);
+        UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 2;
         INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Juliancho', 'Stop', 1, 2, 3);
+        UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 3;
 
         INSERT INTO Pacientes (Nombre, Apellido, Prioridad, Medico, Cama) VALUES ('Rien', 'Sptm', 2, 3, 4);
+        UPDATE Camas SET Estado = 'Ocupado' WHERE Id = 4;
 
         INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('mascarillas', 10, 'Enseres');
         INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES ('suero', 5, 'Enseres');
