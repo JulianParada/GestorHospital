@@ -102,6 +102,13 @@
                                                             </button>
                                                         </div>
                                                         </form>
+                                                        <form action='administrarEquipos.php' method='post'>
+                                                        <div class=\"col\">
+                                                            <button type=\"submit\" value='' name='administrarEquipos' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
+                                                                Administrar Equipos
+                                                            </button>
+                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>  
                                             </div>";
@@ -376,7 +383,7 @@
                 // echo ' '.$cedulap.' '.$idp.' '.$idmed.' '.$fyh.' '.$idsum.' '.$crecurso;
 
                 $sqlSolicitud = "INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado)
-                                VALUES (\"$cedulap\", \"$idp\", \"$idmed\", \"$fyh\", \"$idsum\", \"$crecurso\", 'No aprovado')";
+                                VALUES (\"$cedulap\", \"$idp\", \"$idmed\", \"$fyh\", \"$idsum\", \"$crecurso\", 'No aprobado')";
 
                 if (mysqli_query($con, $sqlSolicitud)) {
                     echo "<h2>Recurso agregado a la solicitud</h2>";
@@ -441,7 +448,7 @@
                     echo "<a class=\"btn btn-info\" href=\"administrarRecursos.php\">Regresar a administrar los recursos</a>";
                 } 
                 else {
-                    echo "Error al Asignar el paciente" . mysqli_error($con);
+                    echo "Error al comprar el recurso" . mysqli_error($con);
                 }
 
             }
@@ -458,7 +465,93 @@
                     echo "<a class=\"btn btn-info\" href=\"administrarRecursos.php\">Regresar a administrar los recursos</a>";
                 } 
                 else {
-                    echo "Error al Asignar el paciente" . mysqli_error($con);
+                    echo "Error al ingresar el recurso" . mysqli_error($con);
+                }
+            }
+
+            if(isset($_POST['comprarEquipo'])){
+                $nameEq = $_POST['equipo'];
+
+                $sqlcompra = "UPDATE Inventario SET Cantidad =  Cantidad + 1 WHERE Nombre = \"$nameEq\"";
+                
+                if (mysqli_query($con, $sqlcompra)) {
+                    echo "<h2>Equipo comprado correctamente</h2>";
+                    echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"administrarEquipos.php\">Regresar a administrar los recursos</a>";
+                } 
+                else {
+                    echo "Error al comprar el equipo" . mysqli_error($con);
+                }
+            }
+
+            if(isset($_POST['nuevoEquipo'])){
+                $nombren = $_POST['name'];
+                $cantidadn = $_POST['cantidadcompra'];
+
+                $sqlcompra = "INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES (\"$nombren\", \"$cantidadn\", 'Equipo')";
+                
+                if (mysqli_query($con, $sqlcompra)) {
+                    echo "<h2>Equipo nuevo comprado correctamente</h2>";
+                    echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"administrarEquipos.php\">Regresar a administrar los equipos</a>";
+                } 
+                else {
+                    echo "Error al ingresar el equipo" . mysqli_error($con);
+                }
+            }
+
+            if(isset($_GET['idCambiar']) && isset($_GET['idEquipo']) && isset($_GET['idNuevo'])){
+                
+                $idAntiguo = $_GET['idCambiar'];
+                $idNuevo = $_GET['idNuevo'];
+                $idEquipo = $_GET['idEquipo'];
+
+                $sqlAntiguo = "SELECT * FROM PACIENTES WHERE Idp = \"$idAntiguo\"";
+                $resAntiguo = mysqli_query($con, $sqlAntiguo);
+                $filaAntiguo = mysqli_fetch_array($resAntiguo);
+                $prioridadAntiguo = $filaAntiguo['Prioridad'];
+
+                $sqlNuevo = "SELECT * FROM PACIENTES WHERE Idp = \"$idNuevo\"";
+                $resNuevo = mysqli_query($con, $sqlNuevo);
+                $filaNuevo = mysqli_fetch_array($resNuevo);
+                $prioridadNuevo = $filaNuevo['Prioridad'];
+
+                $verify = "SELECT * FROM PacientesXInventario WHERE Paciente = \"$idNuevo\" AND Item = \"$idEquipo\" ";
+                $res = mysqli_query($con, $verify);
+                $exists = mysqli_num_rows($res);
+                if($exists == 0){
+                    if($prioridadNuevo > $prioridadAntiguo){
+                        $verify2 ="SELECT * FROM PacientesXInventario WHERE Paciente = \"$idNuevo\" ";
+                        $res2 = mysqli_query($con, $verify2);
+                        $exists2 = mysqli_fetch_array($res2);
+                        if($exists2 <= $prioridadNuevo){
+                            $sql = "UPDATE PacientesXInventario SET Paciente = \"$idNuevo\" WHERE Paciente = \"$idAntiguo\" AND Item = \"$idEquipo\" ";
+                            if (mysqli_query($con, $sql)){
+                                echo "<h2>Se realizó el intercambio con exito</h2>";
+                                echo "<br>";
+                                echo "<a class=\"btn btn-info\" href=\"administrarEquipos.php\">Regresar</a>";
+                            } else {
+                                echo "<h2>Error realizando el intercambio</h2>";
+                                echo "<br>";
+                                echo "<a class=\"btn btn-info\" href=\"cambiarPaciente.php?idCambiar=".$idAntiguo."&idEquipo=".$idEquipo."\">Regresar</a>";
+                            }
+                        } else {
+                            echo "<h2>No se puede hacer el intercambio. El paciente a intercambiar ya tiene el máximo número de equipos a asignar según su prioridad</h2>";
+                            echo "<br>";
+                            echo "<a class=\"btn btn-info\" href=\"cambiarPaciente.php?idCambiar=".$idAntiguo."&idEquipo=".$idEquipo."\">Regresar</a>";
+
+                        }
+                    } else {
+                        echo "<h2>No se puede hacer el intercambio. El paciente a intercambiar tiene menos prioridad que el antiguo</h2>";
+                        echo "<br>";
+                        echo "<a class=\"btn btn-info\" href=\"cambiarPaciente.php?idCambiar=".$idAntiguo."&idEquipo=".$idEquipo."\">Regresar</a>";
+
+                    }
+                } else {
+                    echo "<h2>No se puede hacer el intercambio. El paciente a intercambiar ya tiene el mismo equipo asignado</h2>";
+                    echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"cambiarPaciente.php?idCambiar=".$idAntiguo."&idEquipo=".$idEquipo."\">Regresar</a>";
+
                 }
             }
         ?>
