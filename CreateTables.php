@@ -157,13 +157,17 @@
 
     $sql8 = "CREATE TABLE Solicitudes
     (
-        Id  INT AUTO_INCREMENT,
-        PRIMARY KEY (Id),
+        IdSolicitud  INT NOT NULL,
         Paciente INT NOT NULL,
         FOREIGN KEY (Paciente) references Pacientes (Idp),
         Medico INT NOT NULL,
         FOREIGN KEY (Medico) references Usuarios (Id),
-        FechaSolicitud DATETIME
+        FechaSolicitud DATETIME,
+        Suministro INT NOT NULL,
+        FOREIGN KEY (Suministro) references Inventario (Id),
+        Cantidad INT NOT NULL,
+        Estado Char(25)
+
     )";
     if (mysqli_query($con, $sql8)) {
         echo "Tabla Solicitudes creada correctamente";
@@ -172,7 +176,7 @@
     }
 
     echo "<br>";
-
+    /*
     $sql8 = "CREATE TABLE SolicitudesXInventario
     (
         Id  INT AUTO_INCREMENT,
@@ -189,5 +193,5 @@
         echo "Error en la creacion " . mysqli_error($con);
     }
 
-    echo "<br>";
+    echo "<br>"; */
 ?>

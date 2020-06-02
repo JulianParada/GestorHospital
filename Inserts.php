@@ -61,11 +61,11 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
         INSERT INTO PacientesXInventario (Paciente, Item) VALUES (2,4);
         UPDATE Inventario SET Cantidad = 13 WHERE Id = 4;
 
-        INSERT INTO Solicitudes (Paciente, Medico, FechaSolicitud) VALUES (1, 1, '2020/6/4 22:34:00');
+        INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (10, 1, 2, '2020/6/4 22:34:00', 1, 3, 'No aprovado');
+        INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (10, 1, 2, '2020/6/4 23:54:00', 2, 1, 'No aprovado');
+        INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (10, 1, 2, '2020/6/4 18:14:00', 3, 1, 'No aprovado');
 
-        INSERT INTO SolicitudesXInventario (Suministro, Solicitud, Estado) VALUES (1, 1, 'No aprovado');
-        INSERT INTO SolicitudesXInventario (Suministro, Solicitud, Estado) VALUES (2, 1, 'No aprovado');
-        INSERT INTO SolicitudesXInventario (Suministro, Solicitud, Estado) VALUES (3, 1, 'No aprovado');
+        INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (11, 4, 3, '2020/6/5 6:32:00', 2, 1, 'No aprovado');
 
         ";
 if (mysqli_multi_query($con, $sql)) {

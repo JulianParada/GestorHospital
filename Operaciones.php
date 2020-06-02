@@ -347,6 +347,39 @@
                     echo "Error al Asignar el paciente" . mysqli_error($con);
                 }
             }
+
+            if(isset($_POST['agregarRecursoPaciente'])){
+
+                $nrecurso = $_POST['recurso'];
+                $crecurso = $_POST['cantidadRe'];
+                $idp = $_POST['idpac'];
+                $idmed = $_POST['idmed'];
+                $fyh = $_POST['fyh'];
+
+                $sqlPaciente = "SELECT * FROM PACIENTES WHERE Idp = \"$idp\"";
+                $resPaciente = mysqli_query($con,$sqlPaciente);
+                $filaPaciente = mysqli_fetch_array($resPaciente);
+                $cedulap = $filaPaciente['Cedula'];
+
+                $sqlSuministro = "SELECT * FROM Inventario WHERE Nombre = \"$nrecurso\"";
+                $resSuministro = mysqli_query($con,$sqlSuministro);
+                $filaSuministro = mysqli_fetch_array($resSuministro);
+                $idsum = $filaSuministro['Id'];
+
+                // echo ' '.$cedulap.' '.$idp.' '.$idmed.' '.$fyh.' '.$idsum.' '.$crecurso;
+
+                $sqlSolicitud = "INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado)
+                                VALUES (\"$cedulap\", \"$idp\", \"$idmed\", \"$fyh\", \"$idsum\", \"$crecurso\", 'No aprovado')";
+
+                if (mysqli_query($con, $sqlSolicitud)) {
+                    echo "<h2>Recurso agregado a la solicitud</h2>";
+                    echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"agregarRecursos.php?cc=".$idp."&ccm=".$idmed."\">Regresar y agregar mas recursos</a>";
+                } 
+                else {
+                    echo "Error al Asignar el paciente" . mysqli_error($con);
+                }
+            }
         ?>
     </body>
 </html>

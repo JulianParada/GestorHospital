@@ -23,6 +23,7 @@
 
             $idPaciente = $_GET['cc'];
             $idMedico = $_GET['ccm'];
+            $fechaHoy = date('Y/m/d G:i:s');
 
             $sqlPaciente = "SELECT * FROM PACIENTES WHERE Idp = \"$idPaciente\"";
             $resPaciente = mysqli_query($con,$sqlPaciente);
@@ -41,17 +42,12 @@
             if($exists > 0) {
 
                 $str_datos = "";
-                $recursos = array();
-                while($fila = mysqli_fetch_array($res)){
-                    $recursos["'".$fila['Id']."'"] = $fila['Nombre'];
-                }
-                $selectRecursos = crearSelect('Recursos', 'recursos',$recursos);
+                
                 $str_datos .= 
 
                 "<div class=\"container fluid\">
-                <div class=\"container-fluid alert alert-success\" style=\"margin: 1vw\">
+                <div class=\"container-fluid alert alert-success\" style=\"margin: vw\">
                     <h1>Solicitar Recurso</h1>
-                    <form action='Operaciones.php' method='post'>
                         <div class=\"row form-group\">
                             <label for=\"nombreMedico\" class=\"col-sm-2 col-form-label\">Nombre del Médico</label>
                             <div class=\"col-sm-4\">
@@ -64,18 +60,47 @@
                                 <input type=\"text\" name=\"nombrePaciente\" value=\"$nombrePaciente\" class=\"form-control\" readonly>
                             </div>
                         </div>
+                        <div class=\"row form-group\">
+                            <label for=\"fechaSolicitud\" class=\"col-sm-2 col-form-label\">Fecha/Hora de la solicitud</label>
+                            <div class=\"col-sm-4\">
+                                <input type=\"text\" name=\"fechaSolicitud\" value=\"$fechaHoy\" class=\"form-control\" readonly>
+                            </div>
+                        </div>
                         <div class=\"row form-group\">";
-                        $str_datos .= $selectRecursos;
+                        $str_datos.= "";
+                        $str_datos.='<table class="table">';
+                            $str_datos.='<thead class="thead-dark">';
+                                $str_datos.='<tr>';
+                                    $str_datos.='<th scope="col">Nombre</th>';
+                                    $str_datos.='<th scope="col">Cantidad</th>';
+                                    $str_datos.='<th scope="col"></th>';
+                                    $str_datos.='<th scope="col">Id Paciente</th>';
+                                    $str_datos.='<th scope="col">Id Medico</th>';
+                                    $str_datos.='<th scope="col">Fecha Solicitud</th>';
+                                $str_datos.='</tr>';
+                                $str_datos.='</thead>';
+                                $str_datos.='<tbody>';
+                                foreach($res as $inv){
+                                        $str_datos.= '<form action=\'Operaciones.php\' method=\'post\'>';
+                                        $str_datos.='<tr>';
+                                            $str_datos.='<td><input type="text" name="recurso" value="'. $inv['Nombre'].'" readonly></td>';
+                                            $str_datos.='<td><input type="number" name="cantidadRe"></td>';
+                                            $str_datos.='<td><div class="row form-group">
+                                                        <div class="col-sm-12">
+                                                        <button type="submit" class="btn btn-info" name="agregarRecursoPaciente" value="Agregar">Agregar</button>                                
+                                                        </div>
+                                                        </div></td>';
+                                            $str_datos.='<td><input type="number" name="idpac" value="'. $idPaciente.'" readonly></td>';
+                                            $str_datos.='<td><input type="number" name="idmed" value="'. $idMedico.'" readonly></td>';
+                                            $str_datos.='<td><input type="text" name="fyh" value="'. $fechaHoy.'" readonly></td>';
+                                        $str_datos.='</tr>';
+                                        $str_datos.='</form>';
+                                }
+                                $str_datos.='</tbody>';
+                            $str_datos.='</table>';
+                        $str_datos.='<br>';
                         $str_datos .= 
                         "</div>
-                        <div class=\"row form-group\">
-                            <div class=\"col-sm-6\">
-                                <button type=\"submit\" name='registrarSolicitud' class=\"btn btn-success btn-lg btn-block\">
-                                    Registrar Solicitud
-                                </button>
-                            </div>
-                        </div> 
-                    </form>
                     <a href=\"singlePaciente.php\" class=\"btn btn-info\">Regresar</a>
                 </div> 
             </div>";
