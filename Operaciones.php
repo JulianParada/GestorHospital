@@ -11,6 +11,7 @@
     <body>
         <?php
             include_once dirname(__FILE__) . '../../config.php';
+            include_once dirname(__FILE__) . '/utils.php';
 
             $con = mysqli_connect(HOST_DB, USUARIO_DB, USUARIO_PASS, NOMBRE_DB);
             if (mysqli_connect_errno()) {
@@ -575,7 +576,14 @@
                 $resSolicitud = mysqli_query($con,$sqlSolicitud);
                 $filaSolicitud = mysqli_fetch_array($resSolicitud);
 
+                $idP = $filaSolicitud['Paciente'];
                 $idM = $filaSolicitud['Medico'];
+
+                $sqlPaciente = "SELECT * FROM Pacientes WHERE Idp = \"$idP\"";
+                $resPaciente = mysqli_query($con,$sqlPaciente);
+                $filaPaciente = mysqli_fetch_array($resPaciente);
+
+                $nombrePaciente = $filaPaciente['Nombre'];
 
                 $sqlMedico = "SELECT * FROM USUARIOS INNER JOIN PERSONAS ON USUARIOS.Cedula = PERSONAS.Cedula WHERE USUARIOS.Id = \"$idM\" ";
                 $resMedico = mysqli_query($con,$sqlMedico);
@@ -584,7 +592,9 @@
                 $sqlDelete = "DELETE FROM Solicitudes WHERE IdSolicitud = \"$idSol\" AND Suministro = \"$idI\" ";
 
                 if (mysqli_query($con, $sqlDelete)) {
-                    echo "<h2>Solicitud rechazada</h2>";
+                    $str = "Buenos dias estimado, la solicitud para el paciente ".$nombrePaciente." pidiendo el suministro ".$nombreI." ha sido rechazada. ";
+                    echo "<h2>Solicitud rechazada. Se ha enviado un correo al médico</h2>";
+                    sendemail("juancamachoc97@gmail.com", "Juan", "Camacho", "Solicitud rechazada", $str);
                     echo "<br>";
                     echo "<a class=\"btn btn-info\" href=\"singleSolicitud.php?idS=".$idSol."\">Regresar a la solicitud</a>";
                 } 
@@ -613,6 +623,12 @@
                 $idP = $filaSolicitud['Paciente'];
                 $cantidad = $filaSolicitud['Cantidad'];
 
+                $sqlPaciente = "SELECT * FROM Pacientes WHERE Idp = \"$idP\"";
+                $resPaciente = mysqli_query($con,$sqlPaciente);
+                $filaPaciente = mysqli_fetch_array($resPaciente);
+
+                $nombrePaciente = $filaPaciente['Nombre'];
+
                 $sqlMedico = "SELECT * FROM USUARIOS INNER JOIN PERSONAS ON USUARIOS.Cedula = PERSONAS.Cedula WHERE USUARIOS.Id = \"$idM\" ";
                 $resMedico = mysqli_query($con,$sqlMedico);
                 $filaMedico = mysqli_fetch_array($resMedico);
@@ -624,7 +640,9 @@
                                    UPDATE Inventario SET Cantidad = Cantidad - $cantidad WHERE Id = \"$idI\"";
 
                     if (mysqli_multi_query($con, $sqlAprobar)) {
-                        echo "<h2>Solicitud Aprobada</h2>";
+                        $str = "Buenos dias estimado, la solicitud para el paciente ".$nombrePaciente." pidiendo el suministro ".$nombreI." ha sido aprobada. ";
+                        echo "<h2>Solicitud Aprobada. Se ha enviado un correo al médico</h2>";
+                        sendemail("juancamachoc97@gmail.com", "Juan", "Camacho", "Solicitud aprobada", $str);
                         echo "<br>";
                         echo "<a class=\"btn btn-info\" href=\"singleSolicitud.php?idS=".$idSol."\">Regresar a la solicitud</a>";
                     } 
