@@ -94,7 +94,14 @@
                                                                 Visualizar pacientes
                                                             </button>
                                                         </div>
-                                                    </form>
+                                                        </form>
+                                                        <form action='administrarRecursos.php' method='post'>
+                                                        <div class=\"col\">
+                                                            <button type=\"submit\" value='' name='administrarRecursos' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
+                                                                Administrar Recursos
+                                                            </button>
+                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>  
                                             </div>";
@@ -421,6 +428,38 @@
                     echo "<br>";
                 }
                 
+            }
+
+            if(isset($_POST['comprarRecurso'])){
+                $nameR = $_POST['recurso'];
+
+                $sqlcompra = "UPDATE Inventario SET Cantidad =  Cantidad + 1 WHERE Nombre = \"$nameR\"";
+                
+                if (mysqli_query($con, $sqlcompra)) {
+                    echo "<h2>Recurso comprado correctamente</h2>";
+                    echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"administrarRecursos.php\">Regresar a administrar los recursos</a>";
+                } 
+                else {
+                    echo "Error al Asignar el paciente" . mysqli_error($con);
+                }
+
+            }
+
+            if(isset($_POST['nuevoRecurso'])){
+                $nombren = $_POST['name'];
+                $cantidadn = $_POST['cantidadcompra'];
+
+                $sqlcompra = "INSERT INTO Inventario (Nombre, Cantidad, Tipo) VALUES (\"$nombren\", \"$cantidadn\", 'Enseres')";
+                
+                if (mysqli_query($con, $sqlcompra)) {
+                    echo "<h2>Recurso nuevo comprado correctamente</h2>";
+                    echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"administrarRecursos.php\">Regresar a administrar los recursos</a>";
+                } 
+                else {
+                    echo "Error al Asignar el paciente" . mysqli_error($con);
+                }
             }
         ?>
     </body>
