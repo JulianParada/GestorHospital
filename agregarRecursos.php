@@ -101,7 +101,7 @@
                         $str_datos.='<br>';
                         $str_datos .= 
                         "</div>
-                    <a href=\"singlePaciente.php\" class=\"btn btn-info\">Regresar</a>
+                    <a href=\"singlePaciente.php?cc=".$idPaciente."&ccm=".$idMedico."\" class=\"btn btn-info\">Regresar</a>
                 </div> 
             </div>";
 

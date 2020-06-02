@@ -380,6 +380,48 @@
                     echo "Error al Asignar el paciente" . mysqli_error($con);
                 }
             }
+
+            if(isset($_POST['registrarEquipo'])){
+
+                $idMedico = $_POST['idMedico'];
+                $idPaciente = $_POST['idPaciente'];
+                $fechaSolicitud = $_POST['fechaSolicitud'];
+                $equipos = $_POST['equipos'];
+
+                $sqlPaciente = "SELECT * FROM Pacientes WHERE Idp = \"$idPaciente\" "; 
+                $resPaciente = mysqli_query($con, $sqlPaciente);
+                $fila = mysqli_fetch_array($resPaciente);
+                $prioridad = $fila['Prioridad'];
+                $cedula = $fila['Cedula'];
+
+                $verify2 ="SELECT * FROM PacientesXInventario WHERE Paciente = \"$idPaciente\" AND Item = \"$equipos\" ";
+                $res2 = mysqli_query($con, $verify2);
+                $exists = mysqli_fetch_array($res2);
+
+                if($exists == 0) {
+
+                    $verify3 ="SELECT * FROM PacientesXInventario WHERE Paciente = \"$idPaciente\" ";
+                    $res3 = mysqli_query($con, $verify3);
+                    $exists = mysqli_fetch_array($res3);
+                    if($exists <= $prioridad){
+                        $sql ="INSERT INTO PacientesXInventario (Paciente, Item) VALUES (\"$idPaciente\", \"$equipos\");
+                               UPDATE Inventario SET Cantidad = Cantidad - 1 WHERE Id = \"$equipos\";
+                               INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado)
+                               VALUES (\"$cedula\", \"$idPaciente\", \"$idMedico\", \"$fechaSolicitud\", \"$equipos\", 1, 'No aprobado')";
+                        if(mysqli_multi_query($con, $sql)){
+                            echo "<h2>Equipo agregado correctamente al paciente.</h2><br>";
+                            echo '<a class=\"btn btn-info\" href="Operaciones.php>Regresar</a>"';
+                        }
+                    } else {
+                        echo "<h2>El usuario ya cuenta con el máximo número de equipos según su prioridad.</h2>";
+                        echo "<br>";
+                    }
+                } else {
+                    echo "<h2>El usuario ya cuenta con el equipo solicitado.</h2>";
+                    echo "<br>";
+                }
+                
+            }
         ?>
     </body>
 </html>

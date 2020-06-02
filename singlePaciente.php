@@ -85,7 +85,8 @@
 
             echo "<h1 align=\"center\">Inventario</h1>";
             $str_datos = "";
-            $str_datos.= '<a href=\'agregarRecursos.php?cc='.$id.'&ccm='.$idMedico.' '.'\' class="btn btn-success">Asignar recursos</a>';
+            $str_datos.= '<a href=\'agregarRecursos.php?cc='.$id.'&ccm='.$idMedico.' '.'\' class="btn btn-success">Asignar recursos</a><br><br>';
+            $str_datos.= '<a href=\'agregarEquipos.php?cc='.$id.'&ccm='.$idMedico.' '.'\' class="btn btn-success">Asignar equipos</a>';
             $str_datos.='<table class="table">';
                 $str_datos.='<thead class="thead-dark">';
                     $str_datos.='<tr>';
