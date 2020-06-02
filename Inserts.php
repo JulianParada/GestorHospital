@@ -64,7 +64,6 @@ $sql = "INSERT INTO Personas (Cedula, Nombre, Apellido, Email) VALUES (12345, 'J
         INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (10, 1, 2, '2020/6/4 22:34:00', 1, 3, 'No aprovado');
         INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (10, 1, 2, '2020/6/4 23:54:00', 2, 1, 'No aprovado');
         INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (10, 1, 2, '2020/6/4 18:14:00', 3, 1, 'No aprovado');
-
         INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado) VALUES (11, 4, 3, '2020/6/5 6:32:00', 2, 1, 'No aprovado');
 
         ";

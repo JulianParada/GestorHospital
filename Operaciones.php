@@ -109,6 +109,13 @@
                                                             </button>
                                                         </div>
                                                         </form>
+                                                        <form action='administrarSolicitudes.php' method='post'>
+                                                        <div class=\"col\">
+                                                            <button type=\"submit\" value='' name='administrarSolicitudes' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
+                                                                Centro de mensajes
+                                                            </button>
+                                                        </div>
+                                                        </form>
                                                     </div>
                                                 </div>  
                                             </div>";
@@ -418,12 +425,10 @@
                     $res3 = mysqli_query($con, $verify3);
                     $exists = mysqli_fetch_array($res3);
                     if($exists <= $prioridad){
-                        $sql ="INSERT INTO PacientesXInventario (Paciente, Item) VALUES (\"$idPaciente\", \"$equipos\");
-                               UPDATE Inventario SET Cantidad = Cantidad - 1 WHERE Id = \"$equipos\";
-                               INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado)
+                        $sql ="INSERT INTO Solicitudes (IdSolicitud, Paciente, Medico, FechaSolicitud, Suministro, Cantidad, Estado)
                                VALUES (\"$cedula\", \"$idPaciente\", \"$idMedico\", \"$fechaSolicitud\", \"$equipos\", 1, 'No aprobado')";
-                        if(mysqli_multi_query($con, $sql)){
-                            echo "<h2>Equipo agregado correctamente al paciente.</h2><br>";
+                        if(mysqli_query($con, $sql)){
+                            echo "<h2>Equipo agregado a la solicitud</h2><br>";
                             echo '<a class=\"btn btn-info\" href="Operaciones.php>Regresar</a>"';
                         }
                     } else {
@@ -552,6 +557,84 @@
                     echo "<br>";
                     echo "<a class=\"btn btn-info\" href=\"cambiarPaciente.php?idCambiar=".$idAntiguo."&idEquipo=".$idEquipo."\">Regresar</a>";
 
+                }
+            }
+
+            if(isset($_GET['rechazarSol'])){
+
+                $idSol = $_GET['idSolicitud'];
+                $nombreI = $_GET['suministro'];
+
+                $sqlInventario = "SELECT * FROM Inventario WHERE Nombre = \"$nombreI\"";
+                $resInventario = mysqli_query($con,$sqlInventario);
+                $filaInventario = mysqli_fetch_array($resInventario);
+
+                $idI = $filaInventario['Id'];
+
+                $sqlSolicitud = "SELECT * FROM SOLICITUDES WHERE IdSolicitud = \"$idSol\" AND Suministro =\"$idI\" ";
+                $resSolicitud = mysqli_query($con,$sqlSolicitud);
+                $filaSolicitud = mysqli_fetch_array($resSolicitud);
+
+                $idM = $filaSolicitud['Medico'];
+
+                $sqlMedico = "SELECT * FROM USUARIOS INNER JOIN PERSONAS ON USUARIOS.Cedula = PERSONAS.Cedula WHERE USUARIOS.Id = \"$idM\" ";
+                $resMedico = mysqli_query($con,$sqlMedico);
+                $filaMedico = mysqli_fetch_array($resMedico);
+
+                $sqlDelete = "DELETE FROM Solicitudes WHERE IdSolicitud = \"$idSol\" AND Suministro = \"$idI\" ";
+
+                if (mysqli_query($con, $sqlDelete)) {
+                    echo "<h2>Solicitud rechazada</h2>";
+                    echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"singleSolicitud.php?idS=".$idSol."\">Regresar a la solicitud</a>";
+                } 
+                else {
+                    echo "Error al ingresar el equipo" . mysqli_error($con);
+                }
+            }
+
+            if(isset($_GET['aprobarSol'])){
+
+                $idSol = $_GET['idSolicitud'];
+                $nombreI = $_GET['suministro'];
+
+                $sqlInventario = "SELECT * FROM Inventario WHERE Nombre = \"$nombreI\"";
+                $resInventario = mysqli_query($con,$sqlInventario);
+                $filaInventario = mysqli_fetch_array($resInventario);
+
+                $idI = $filaInventario['Id'];
+                $disponible = $filaInventario['Cantidad'];
+
+                $sqlSolicitud = "SELECT * FROM SOLICITUDES WHERE IdSolicitud = \"$idSol\" AND Suministro =\"$idI\" ";
+                $resSolicitud = mysqli_query($con,$sqlSolicitud);
+                $filaSolicitud = mysqli_fetch_array($resSolicitud);
+
+                $idM = $filaSolicitud['Medico'];
+                $idP = $filaSolicitud['Paciente'];
+                $cantidad = $filaSolicitud['Cantidad'];
+
+                $sqlMedico = "SELECT * FROM USUARIOS INNER JOIN PERSONAS ON USUARIOS.Cedula = PERSONAS.Cedula WHERE USUARIOS.Id = \"$idM\" ";
+                $resMedico = mysqli_query($con,$sqlMedico);
+                $filaMedico = mysqli_fetch_array($resMedico);
+
+                if($cantidad <= $disponible){
+
+                    $sqlAprobar = "DELETE FROM Solicitudes WHERE IdSolicitud = \"$idSol\" AND Suministro = \"$idI\";
+                                   INSERT INTO PacientesXInventario (Paciente, Item) VALUES (\"$idP\", \"$idI\");
+                                   UPDATE Inventario SET Cantidad = Cantidad - $cantidad WHERE Id = \"$idI\"";
+
+                    if (mysqli_multi_query($con, $sqlAprobar)) {
+                        echo "<h2>Solicitud Aprobada</h2>";
+                        echo "<br>";
+                        echo "<a class=\"btn btn-info\" href=\"singleSolicitud.php?idS=".$idSol."\">Regresar a la solicitud</a>";
+                    } 
+                    else {
+                        echo "Error al ingresar el equipo" . mysqli_error($con);
+                    }
+                } else {
+                    echo "<h2>Solicitud rechazada. La cantidad a pedir no se encuentra disponible.</h2>";
+                        echo "<br>";
+                        echo "<a class=\"btn btn-info\" href=\"singleSolicitud.php?idS=".$idSol."\">Regresar a la solicitud</a>";
                 }
             }
         ?>
