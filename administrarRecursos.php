@@ -55,6 +55,8 @@
                     </tbody>
                 </table>
             </div>
+            <br>
+            <a href="indexAdministrador.php" class="btn btn-info">Regresar</a>
         </div>
     </body>
 </html>

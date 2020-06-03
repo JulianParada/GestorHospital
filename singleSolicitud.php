@@ -103,6 +103,8 @@
                             $str_datos.='</tbody>';
                         $str_datos.='</table>';
                     $str_datos.='<br>';
+                    $str_datos.='<br>';
+                    $str_datos.='<a class="btn btn-info" href="administrarSolicitudes.php">Regresar a las solicitudes</a>';
                     $str_datos .= 
                     "</div>
             </div> 
@@ -110,8 +112,6 @@
 
         echo $str_datos;
         ?>
-
-
     </div>
 </body>
 </html>

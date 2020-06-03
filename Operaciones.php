@@ -39,89 +39,17 @@
                             
                             if($rol == "medico"){
 
-                                $str_datos = "<div class=\"container-fluid bg-dark text-white\">
-                                                <h1 align=\"center\">Menú Principal Médico</h1>
-                                                <div class=\"row alert alert-success\" align=\"center\">
-                                                    <div class=\"col\">
-                                                        <form action='verPacientes.php' method='post'>
-                                                            <div class=\"col\">
-                                                                <button type=\"submit\" value='$cedula' name='verPacientes' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                    Ver Pacientes
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                        <form action='verHabitaciones.php' method='post'>
-                                                            <div class=\"col\">
-                                                                <button type=\"submit\" value='$cedula' name='verHabitaciones' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                    Ver Habitaciones
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                </div>  
-                                            </div>";
-                                echo $str_datos;
+                                echo "<h2>Sesion iniciada correctamente</h2>";
+                                echo "<br>";
+                                echo "<a class=\"btn btn-info\" href=\"indexMedico.php?cc=".$cedula."\">Ir al centro Medico</a>";
                 
                             }else if($rol == "administrador"){
 
-                                $str_datos = "<div class=\"container-fluid bg-dark text-white\">
-                                                <h1 align=\"center\">Menú Principal Administrador</h1>
-                                                <div class=\"row alert alert-success\" align=\"center\">
-                                                    <div class=\"col\">
-                                                        <form action='agregarAdmin.php' method='post'>
-                                                            <div class=\"col\">
-                                                                <button type=\"submit\" value='' name='agregarAdmin' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                    Agregar nuevo administrador
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                        <form action='agregarHabitacion.php' method='post'>
-                                                            <div class=\"col\">
-                                                                <button type=\"submit\" value='' name='agregarHabitacion' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                    Agregar Habitación
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                        <form action='agregarCama.php' method='post'>
-                                                            <div class=\"col\">
-                                                                <button type=\"submit\" value='' name='agregarCama' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                    Agregar Cama
-                                                                </button>
-                                                            </div>
-                                                        </form>
-                                                        <form action='verPacientesAdmin.php' method='post'>
-                                                        <div class=\"col\">
-                                                            <button type=\"submit\" value='' name='verPacientesAdmin' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                Visualizar pacientes
-                                                            </button>
-                                                        </div>
-                                                        </form>
-                                                        <form action='administrarRecursos.php' method='post'>
-                                                        <div class=\"col\">
-                                                            <button type=\"submit\" value='' name='administrarRecursos' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                Administrar Recursos
-                                                            </button>
-                                                        </div>
-                                                        </form>
-                                                        <form action='administrarEquipos.php' method='post'>
-                                                        <div class=\"col\">
-                                                            <button type=\"submit\" value='' name='administrarEquipos' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                Administrar Equipos
-                                                            </button>
-                                                        </div>
-                                                        </form>
-                                                        <form action='administrarSolicitudes.php' method='post'>
-                                                        <div class=\"col\">
-                                                            <button type=\"submit\" value='' name='administrarSolicitudes' class=\"btn btn-info btn-lg btn-block\" style=\"margin-bottom: 1vw; margin-top: 1vw;\">
-                                                                Centro de mensajes
-                                                            </button>
-                                                        </div>
-                                                        </form>
-                                                    </div>
-                                                </div>  
-                                            </div>";
-                                echo "".$str_datos;
+                                echo "<h2>Sesion iniciada correctamente</h2>";
+                                echo "<br>";
+                                echo "<a class=\"btn btn-info\" href=\"indexAdministrador.php\">Ir al centro Administrativo</a>";
                             }
+                            echo '<br>';
                             echo "<a class=\"btn btn-info\" href=\"login.php\">Cerrar Sesión</a>";
                 
                         } else {
@@ -180,6 +108,7 @@
                                 if(mysqli_query($con, $sql1)){
                                     if(mysqli_query($con, $sql2)){
                                         echo "<h2>Administrador registrado correctamente.</h2>";
+                                        echo "<a href=\"indexAdministrador.php\" class=\"btn btn-info\">Regresar</a>";
                                     }
                                 }
                             }
@@ -242,6 +171,7 @@
                                 if(mysqli_query($con, $sql1)){
                                     if(mysqli_query($con, $sql2)){
                                         echo "<h2>Médico registrado correctamente.</h2>";
+                                        echo "<a class=\"btn btn-info\" href=\"login.php\">Iniciar Sesion Nuevamente</a>";
                                     }
                                 }
                             }
@@ -276,7 +206,8 @@
                         $sql2 ="INSERT INTO HABITACIONES (NUMERO) VALUES (\"$numeroHabitacion\")";
                         if(mysqli_query($con, $sql2)){
                             echo '<h2>Habitación creada</h2><br>';
-                            echo '<a class=\"btn btn-info\" href="Operaciones.php>Regresar</a>"';
+                            // echo '<a class=\"btn btn-info\" href="Operaciones.php>Regresar</a>"';
+                            echo "<a href=\"indexAdministrador.php\" class=\"btn btn-info\">Regresar</a>";
                         }
                     }
                     else{
@@ -297,24 +228,26 @@
                 if(isset($_POST['habitacion']) != ''){
                 $habitacion = $_POST['habitacion'];
                 
-                    $sql2 ="INSERT INTO CAMAS (HABITACION) VALUES (\"$habitacion\")";
+                    $sql2 ="INSERT INTO CAMAS (HABITACION, Estado) VALUES (\"$habitacion\", 'Disponible')";
                     if(mysqli_query($con, $sql2)){
                         echo "<h2>Cama agregada a la habitación</h2><br>";
-                        echo '<a class=\"btn btn-info\" href="Operaciones.php>Regresar</a>"';
+                        // echo '<a class=\"btn btn-info\" href="Operaciones.php">Regresar</a>';
+                        echo "<a href=\"indexAdministrador.php\" class=\"btn btn-info\">Regresar</a>";
                     }
                 }
                 else{
                 echo "<h2>Datos Incorrectos.</h2>";
                 echo "<br>";
-                echo "<a class=\"btn btn-info\" href=\"agregarHabitacion.php\">Regresar</a>";
+                echo "<a class=\"btn btn-info\" href=\"agregarCama.php\">Regresar</a>";
                 }
                 
             }
 
-            if(isset($_GET['idPaciente']) && isset($_GET['idInventario'])){
+            if(isset($_GET['idPaciente']) && isset($_GET['idInventario']) && isset($_GET['idMed'])){
                 
                 $idPaciente = $_GET['idPaciente'];
                 $idInventario = $_GET['idInventario'];
+                $idmed = $_GET['idMed'];
 
                 $sqlDelete = "DELETE FROM PacientesXInventario WHERE Paciente = \"$idPaciente\" AND Item = \"$idInventario\";
                 UPDATE Inventario set Cantidad = Cantidad + 1 where Id =\"$idInventario\"";
@@ -322,7 +255,7 @@
                 if (mysqli_multi_query($con, $sqlDelete)) {
                     echo "<h2>Equipo Eliminado correctamente.</h2>";
                     echo "<br>";
-                    echo '<a class="btn btn-info" href=\'singlePaciente.php?cc='.$idPaciente.'\'>'. 'Regresar' . '</a>';
+                    echo '<a class="btn btn-info" href=\'singlePaciente.php?cc='.$idPaciente.'&ccm='.$idmed.'\'>'. 'Regresar' . '</a>';
                 } 
                 else {
                     echo "Error al borrar el equipo" . mysqli_error($con);
@@ -361,9 +294,15 @@
                 \"$idCamaPaciente\");
                 UPDATE CAMAS SET Estado = \"Ocupado\" WHERE ID = \"$idCamaPaciente\";";
 
+                $sqlmed = "SELECT * FROM usuarios WHERE Id = \"$idMedicoPaciente\"";
+                $resmed = mysqli_query($con,$sqlmed);
+                $filamed = mysqli_fetch_array($resmed);
+                $cedulam = $filamed['Cedula'];
+
                 if (mysqli_multi_query($con, $sqlInsertPaciente)) {
                     echo "<h2>Paciente Asignado</h2>";
                     echo "<br>";
+                    echo "<a class=\"btn btn-info\" href=\"indexMedico.php?cc=".$cedulam."\">Ir al centro Medico</a>";
                 } 
                 else {
                     echo "Error al Asignar el paciente" . mysqli_error($con);
@@ -483,7 +422,7 @@
                 if (mysqli_query($con, $sqlcompra)) {
                     echo "<h2>Equipo comprado correctamente</h2>";
                     echo "<br>";
-                    echo "<a class=\"btn btn-info\" href=\"administrarEquipos.php\">Regresar a administrar los recursos</a>";
+                    echo "<a class=\"btn btn-info\" href=\"administrarEquipos.php\">Regresar a administrar los equipos</a>";
                 } 
                 else {
                     echo "Error al comprar el equipo" . mysqli_error($con);

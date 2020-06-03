@@ -52,12 +52,12 @@
             
             echo $str_datos;
             echo "<br>";
-            echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+            echo "<a href=\"indexAdministrador.php\" class=\"btn btn-info\">Regresar</a>";
         }
         else{
             echo "No hay pacientes registrados en el sistema";
             echo "<br>";
-            echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+            echo "<a href=\"indexAdministrador.php\" class=\"btn btn-info\">Regresar</a>";
         }
 
         

@@ -25,7 +25,7 @@
                     </div>
                 </div> 
             </form>
-            <a href="Operaciones.php" class="btn btn-info">Regresar</a>
+            <a href="indexAdministrador.php" class="btn btn-info">Regresar</a>
         </div>
     </div>
 </body>

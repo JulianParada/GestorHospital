@@ -50,7 +50,7 @@
                     </div>
                 </div>
                 <div class="row form-group">
-                    <label for="cedula" class="col-sm-2 col-form-label">Duración en la cama 7u7</label>
+                    <label for="cedula" class="col-sm-2 col-form-label">Duración de la hospitalizacion (dias)</label>
                     <div class="col-sm-4">
                         <input type="number" name="duracionPaciente" class="form-control">
                     </div>
@@ -79,7 +79,6 @@
                     </div>
                 </div> 
             </form>
-            <a href="Login.php" class="btn btn-info">Regresar</a>
         </div>
     </div>
 </body>

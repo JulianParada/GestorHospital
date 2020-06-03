@@ -38,7 +38,7 @@
                             else{
                                 echo "No hay habitaciones disponibles, inserte una habitacion primero";
                                 echo "<br>";
-                                echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+                                echo "<a href=\"indexAdministrador.php\" class=\"btn btn-info\">Regresar</a>";
                             }
                         ?>
                     </div>
@@ -49,7 +49,7 @@
                     </div>
                 </div> 
             </form>
-            <a href="Operaciones.php" class="btn btn-info">Regresar</a>
+            <a href="indexAdministrador.php" class="btn btn-info">Regresar</a>
         </div>
     </div>
 </body>

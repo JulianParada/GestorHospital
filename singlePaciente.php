@@ -32,6 +32,12 @@
 
             $idMedico = $_GET['ccm'];
 
+            $sqlmed = "SELECT * FROM usuarios WHERE ID = \"$idMedico\" ";
+            $resmed = mysqli_query($con,$sqlmed);
+            $filamed = mysqli_fetch_array($resmed);
+
+            $ccmed = $filamed['Cedula'];
+
             $sqlCama = "SELECT * FROM CAMAS WHERE ID = \"$cama\" ";
             $resCama = mysqli_query($con,$sqlCama);
             $filaCama = mysqli_fetch_array($resCama);
@@ -104,7 +110,7 @@
                                 <a class="btn btn-danger"
                                 href=\'Operaciones.php?
                                 idPaciente='.$id.
-                                '&idInventario='.$inventario['Id'].
+                                '&idInventario='.$inventario['Id']. '&idMed='.$idMedico.
                                 '\'>'. 'Eliminar'. '</a>
                                 </td>';
                             $str_datos.='</tr>';
@@ -115,7 +121,7 @@
             echo $str_datos;
 
             echo "<br>";
-            echo "<a class=\"btn btn-info\" href=\"verPacientes.php\">Regresar</a>";
+            echo "<a class=\"btn btn-info\" href=\"verPacientes.php?verPacientes=".$ccmed."\">Regresar</a>";
 
         ?>
     </div>

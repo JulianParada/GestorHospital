@@ -16,7 +16,7 @@
         if (mysqli_connect_errno()) {
             echo "Error en la conexión: " . mysqli_connect_error();
         }
-        $usuario = $_POST['verPacientes'];
+        $usuario = $_GET['verPacientes'];
 
         $sqlMedico = "SELECT Id FROM Usuarios WHERE CEDULA = \"$usuario\"";
         $resMedico = mysqli_query($con, $sqlMedico);
@@ -58,12 +58,13 @@
             
             echo $str_datos;
             echo "<br>";
-            echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+            echo "<a class=\"btn btn-info\" href=\"indexMedico.php?cc=".$usuario."\">Regresar</a>";
         }
         else{
             echo "El medico no tiene pacientes asignados";
             echo "<br>";
-            echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+            // echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+            echo "<a class=\"btn btn-info\" href=\"indexMedico.php?cc=".$usuario."\">Regresar</a>";
         }
 
         

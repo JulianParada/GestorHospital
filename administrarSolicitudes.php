@@ -62,12 +62,12 @@
             
             echo $str_datos;
             echo "<br>";
-            echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+            echo "<a class=\"btn btn-info\" href=\"indexAdministrador.php\">Regresar</a>";
         }
         else{
             echo "No hay solicitudes pendientes";
             echo "<br>";
-            echo "<a class=\"btn btn-info\" href=\"Operaciones.php\">Regresar</a>";
+            echo "<a class=\"btn btn-info\" href=\"indexAdministrador.php\">Regresar</a>";
         }
 
         
