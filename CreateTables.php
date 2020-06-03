@@ -176,22 +176,4 @@
     }
 
     echo "<br>";
-    /*
-    $sql8 = "CREATE TABLE SolicitudesXInventario
-    (
-        Id  INT AUTO_INCREMENT,
-        PRIMARY KEY (Id),
-        Suministro INT NOT NULL,
-        FOREIGN KEY (Suministro) references Inventario (Id),
-        Solicitud INT NOT NULL,
-        FOREIGN KEY (Solicitud) references Solicitudes (Id),
-        Estado Char(25)
-    )";
-    if (mysqli_query($con, $sql8)) {
-        echo "Tabla SolicitudesXInventario creada correctamente";
-    } else {
-        echo "Error en la creacion " . mysqli_error($con);
-    }
-
-    echo "<br>"; */
 ?>

@@ -50,7 +50,7 @@
                                 $str_datos.='</form>';
 
                                 echo $str_datos;
-                        }
+                            }
                         ?>
                     </tbody>
                 </table>

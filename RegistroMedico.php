@@ -67,6 +67,5 @@ Antes de mostar esta página se debió ejecutar lo siguiente
                 <a href="Login.php" class="btn btn-info">Regresar</a>
             </div>
         </div>
-
     </body>
 </html>

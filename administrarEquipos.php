@@ -11,7 +11,6 @@
         <div class="container-fluid" style="margin: 1vw">
             <h1>Administrar Equipos</h1>
             <br><br>
-            
             <a class="btn btn-success" href="comprarEquipo.php">Comprar Nuevo equipo</a>
             <br>
             <div class="row-form-group">
@@ -51,7 +50,7 @@
                                 $str_datos.='</form>';
 
                                 echo $str_datos;
-                        }
+                            }
                         ?>
                     </tbody>
                 </table>
